@@ -11,6 +11,7 @@ fn main() {
     let mut handles = vec![];
     let (tx, rx) = channel::<Task>();
     let receiver = Arc::new(Mutex::new(rx));
+
     for i in 1..10 {
         let receiver_clone = Arc::clone(&receiver);
         let handle = thread::spawn(move || {
@@ -20,17 +21,16 @@ fn main() {
         handles.push(handle);
     }
 
-    for i  in 1..10 {
+    for i in 1..10 {
         let _task = Task::new(i, "test");
         tx.send(_task).unwrap();
     }
 
+    //TODO Add the response receiving channel.
+
     for handle in handles {
         handle.join().unwrap();
     }
-
-
-
 
     println!("Hello, world!");
 }

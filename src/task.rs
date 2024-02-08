@@ -1,6 +1,6 @@
 pub struct Task {
     id: u32,
-    payload:  *const str,
+    payload: *const str,
 }
 
 impl Task {
@@ -12,6 +12,9 @@ impl Task {
     }
     pub fn get_task_id(&self) -> u32 {
         return self.id;
+    }
+    pub fn get_payload(&self) -> *const str {
+        return self.payload;
     }
 }
 
